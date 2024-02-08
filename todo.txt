@@ -1,0 +1,22 @@
+"1. Replace the webpack to vitejs +"
+2. Fix useState +
+3. Combine userName and password in one state + 
+4. Clean up the package.json (scss,...) +
+5. Desctructure data (get username and password) +
+6. && vs ||(comparison) +
+
+
+1. Send req to API (https://fakestoreapi.com/auth/login)
+2. Validate credentials
+3. If auth is passed then redirect to the ProtectedRoute
+4. Decode JWT token
+5. Save JWT token in the localStorage
+
+6. Fragment
+7. ??, ||, ||=, &&, &&=, ?.
+8. spread vs rest
+    let capitals = ["Dublin", "Dushanbe"]
+    let newCapitals = ["Buenos Aires", "Mexico"]
+    let concatCapitals = [...capitals, ...newCapitals] // spread vs rest
+
+    

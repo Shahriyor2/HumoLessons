@@ -1,0 +1,12 @@
+.footerBox {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  background: rgb(226, 111, 50);
+  background: linear-gradient(
+    90deg,
+    rgba(226, 111, 50, 1) 43%,
+    rgba(230, 84, 7, 1) 83%
+  );
+}
