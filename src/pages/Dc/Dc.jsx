@@ -1,4 +1,4 @@
-export const DC = () => {
+function Dicy() {
   return (
     <div style={{ color: "red" }}>
       DC
@@ -9,4 +9,6 @@ export const DC = () => {
       molestias?
     </div>
   );
-};
+}
+
+export default Dicy;

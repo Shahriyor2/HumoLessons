@@ -1,8 +1,9 @@
 import { jwtDecode } from "jwt-decode";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
+import style from "./user.module.scss";
 
-export const User = () => {
+function User() {
   const [data, setData] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
@@ -40,36 +41,16 @@ export const User = () => {
       ) : (
         <div>
           {data && (
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
+            <div className={style.dataUser}>
               <h1>User: {data.user}</h1>
               <p>sub: {data.sub}</p>
               <p>iat: {data.iat}</p>
-
-              {/* <select
-                value={selectedOption}
-                onChange={(e) => handleClickOption(e)}
-                name=""
-                id=""
-              >
-                {Object.values(indexOutlet).map((val) => {
-                  return (
-                    <option key={val} value={val}>
-                      {val}
-                    </option>
-                  );
-                })}
-              </select> */}
             </div>
           )}
         </div>
       )}
     </div>
   );
-};
+}
+
+export default User;

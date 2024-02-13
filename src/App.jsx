@@ -1,14 +1,12 @@
-import { Route, Routes, useNavigate } from "react-router-dom";
-import "./App.css";
-import { Marvel } from "./pages/Users/Marvel";
-import { DC } from "./pages/Users/DC";
-import { Humo } from "./pages/Users/Humo";
+/* eslint react/prop-types: 0 */
+import { Navigate, Route, Routes, useNavigate } from "react-router-dom";
 import { ProtectedRoute } from "./components/ProtectedRoute";
-import { SecondLogin } from "./components/SecondLogin";
-import { User } from "./pages/Users/User";
-import "./index.css";
-import { useEffect, useState } from "react";
+import { LoginForm } from "./pages/Login/LoginForm";
 import { jwtDecode } from "jwt-decode";
+import { Suspense, useEffect, useState } from "react";
+import { LazzyLoading } from "./components/lazzyLoading/lazzyLoading";
+import { Dc, Humo, Marvel, User } from "./routes/LazyRoutes";
+import { useSelector } from "react-redux";
 
 function App() {
   const roles = {
@@ -17,41 +15,35 @@ function App() {
     SUPERVISOR: "kevinryan",
   };
   const { SUPPORT, ANALYTIC, SUPERVISOR } = roles;
-  const [authenticated, setAuthenticated] = useState(false);
-
+  const { authenticated } = useSelector((state) => state.user);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    if (!token) {
-      navigate("/");
-    } else {
-      const decodedToken = jwtDecode(token);
-      if (decodedToken) {
-        setAuthenticated(true);
-      } else {
-        navigate("/");
-      }
+    if (!authenticated) {
+      navigate("/login");
     }
-  }, [navigate]);
+  }, [authenticated, navigate]);
+
   return (
-    <Routes>
-      <Route path="/" element={<SecondLogin />} />
-      {authenticated && (
-        <>
-          <Route path="/user" element={<User />} />
-          <Route element={<ProtectedRoute role={[SUPPORT, ANALYTIC]} />}>
-            <Route path="/marvel" element={<Marvel />} />
-          </Route>
-          <Route element={<ProtectedRoute role={[SUPERVISOR]} />}>
-            <Route path="/dc" element={<DC />} />
-          </Route>
-          <Route element={<ProtectedRoute role={[SUPERVISOR, SUPPORT]} />}>
-            <Route path="/humo" element={<Humo />} />
-          </Route>
-        </>
-      )}
-    </Routes>
+    <Suspense fallback={<LazzyLoading />}>
+      <Routes>
+        <Route path="/login" element={<LoginForm />} />
+        <Route path="/user" element={<User />} />
+        {authenticated && (
+          <>
+            <Route element={<ProtectedRoute role={[SUPPORT, ANALYTIC]} />}>
+              <Route path="/marvel" element={<Marvel />} />
+            </Route>
+            <Route element={<ProtectedRoute role={[SUPERVISOR]} />}>
+              <Route path="/dc" element={<Dc />} />
+            </Route>
+            <Route element={<ProtectedRoute role={[SUPERVISOR, SUPPORT]} />}>
+              <Route path="/humo" element={<Humo />} />
+            </Route>
+          </>
+        )}
+      </Routes>
+    </Suspense>
   );
 }
 

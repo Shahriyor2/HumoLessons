@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+}
+.container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  .content {
+    display: flex;
+    flex-grow: 1;
+    align-items: center;
+    justify-content: center;
+  }
+
+  p {
+    margin: 0;
+  }
+
+}

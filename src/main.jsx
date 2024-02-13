@@ -1,14 +1,22 @@
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import "./index.css";
+import "./style/index.scss";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Header } from "./components/header/Header.jsx";
-import { Footer } from "./components/footer/Footer.jsx";
+import { Header } from "./components/Layout/Header/Header.jsx";
+import { Footer } from "./components/Layout/Footer/Footer";
+import { Provider } from "react-redux";
+import { store } from "./store/index";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <Router>
-    <Header />
-    <App />
-    <Footer />
+    <Provider store={store}>
+      <div className="container">
+        <Header />
+        <div className="content">
+          <App />
+        </div>
+        <Footer />
+      </div>
+    </Provider>
   </Router>
 );

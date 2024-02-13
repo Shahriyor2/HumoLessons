@@ -1,20 +1,18 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  authentifaceted: false,
+  authenticated: localStorage.getItem("authenticated") === "true",
 };
 
 export const userReducer = createSlice({
   name: "user",
   initialState,
   reducers: {
-    setAuthentifacated(state) {
-      state.authentifaceted = true;
+    setAuthenticated(state, action) {
+      state.authenticated = action.payload;
+      localStorage.setItem("authenticated", action.payload);
     },
   },
 });
 
-export const { setAuthentifacated } = userReducer.actions;
-export default userReducer.reducer;
-
-// "redux-toolkit": "^1.8.5",
+export const { setAuthenticated } = userReducer.actions;
