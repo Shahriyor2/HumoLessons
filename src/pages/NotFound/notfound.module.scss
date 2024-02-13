@@ -1,0 +1,22 @@
+.notFound {
+  background: url("https://optim.tildacdn.com/tild3664-3466-4465-b033-623066373864/-/format/webp/404_found.jpg")
+    center/cover no-repeat;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  min-height: 82vh;
+
+  h1 {
+    position: relative;
+    bottom: -155px;
+    cursor: pointer;
+    transition: transform 334ms ease-in-out;
+    color: rgb(226, 111, 50);
+    text-align: center;
+    font-size: 25px;
+
+    &:hover {
+      transform: translate(0px, 0px) scale(0.9, 1);
+    }
+  }
+}

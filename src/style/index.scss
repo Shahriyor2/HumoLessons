@@ -1,7 +1,23 @@
+@import "./mixin.scss";
+@import "./normalize.scss";
+@import "./variables";
+
 body {
   margin: 0;
-  padding: 0;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
+
+* {
+  font-family: "Inter", system-ui;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New",
+    monospace;
+}
+
+
 .container {
   min-height: 100vh;
   display: flex;
@@ -10,12 +26,12 @@ body {
   .content {
     display: flex;
     flex-grow: 1;
-    align-items: center;
+    // align-items: center;
     justify-content: center;
+    flex-direction: column;
   }
 
   p {
     margin: 0;
   }
-
 }

@@ -1,7 +1,8 @@
-import { DownOutlined } from "@ant-design/icons";
+import { DownOutlined, createFromIconfontCN } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
-import { createFromIconfontCN } from "@ant-design/icons";
+import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
+import { setAuthenticated } from "../../store/UserReducer/UserReducer";
 
 const IconFont = createFromIconfontCN({
   scriptUrl: "//at.alicdn.com/t/font_8d5l8fzk5b87iudi.js",
@@ -31,9 +32,10 @@ const items = [
 
 export const DropDown = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
   const handleLogOut = () => {
     localStorage.removeItem("token");
+    dispatch(setAuthenticated(false));
     navigate("/login");
   };
   return (
