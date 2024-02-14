@@ -59,29 +59,11 @@ export const LoginForm = () => {
         >
           <p>
             Имя поьзователя:
-            <span
-              style={{
-                fontStyle: "italic",
-                fontWeight: "600",
-                marginLeft: "7px",
-                color: "green",
-              }}
-            >
-              mor_2314
-            </span>
+            <span>mor_2314</span>
           </p>
           <p>
             Пароль:
-            <span
-              style={{
-                fontStyle: "italic",
-                fontWeight: "600",
-                marginLeft: "7px",
-                color: "green",
-              }}
-            >
-              83r5^_
-            </span>
+            <span>83r5^_</span>
           </p>
         </div>
       </div>

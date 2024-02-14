@@ -6,13 +6,15 @@ import { Navigate, Outlet } from "react-router";
 
 export const ProtectedRoute = ({ role }) => {
   const getToken = localStorage.getItem("token");
-  const nameUser = jwtDecode(getToken).user;
+
+  const { user } = jwtDecode(getToken);
+
   // Guard clause
   if (!role) return;
 
   return (
-    <Fragment>
-      {role?.includes(nameUser) ? <Outlet /> : <Navigate to="/login" />}
+      <Fragment>
+      {role?.includes(user) ? <Outlet /> : <Navigate to="/login" />}
     </Fragment>
   );
 };

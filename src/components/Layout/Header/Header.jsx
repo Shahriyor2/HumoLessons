@@ -8,9 +8,12 @@ export const Header = () => {
   const token = localStorage.getItem("token");
   const tokenName = token ? jwtDecode(token).user : null;
 
+  console.log(authenticated);
+
   const backgroundStyle = authenticated
     ? { background: "rgb(226, 111, 50)" }
     : { background: "gray" };
+
   return (
     <div style={backgroundStyle} className={style.headerContent}>
       <h1>Humo</h1>

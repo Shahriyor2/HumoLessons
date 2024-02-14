@@ -11,7 +11,6 @@ export const LoginLogik = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-
   const { userName, password } = useSelector((state) => state.login.userData);
 
   const handleOnChange = (event) => {

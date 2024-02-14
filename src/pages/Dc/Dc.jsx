@@ -4,10 +4,12 @@ function Dicy() {
       <header>DC</header>
       <br />
       <main>
-        Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa cumque
-        optio recusandae eaque blanditiis delectus quis perferendis veniam
-        aperiam fugit, rerum molestias modi aliquam. Commodi natus placeat
-        fugiat. Magni, molestias?
+        <section>
+          Lorem ipsum dolor sit, amet consectetur adipisicing elit. Ipsa cumque
+          optio recusandae eaque blanditiis delectus quis perferendis veniam
+          aperiam fugit, rerum molestias modi aliquam. Commodi natus placeat
+          fugiat. Magni, molestias?
+        </section>
       </main>
     </div>
   );

@@ -58,6 +58,15 @@
 
     .autoBlockText {
       cursor: pointer;
+
+      p {
+        span {
+          font-style: italic;
+          font-weight: 600;
+          margin-left: 7px;
+          color: green;
+        }
+      }
     }
   }
 }
