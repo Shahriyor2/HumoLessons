@@ -1,7 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-  authenticated: localStorage.getItem("authenticated") === "true",
+  authenticated: Boolean(localStorage.getItem("authenticated")) === true,
   data: "",
   isLoading: true,
 };
@@ -12,7 +12,7 @@ export const userReducer = createSlice({
   reducers: {
     setAuthenticated(state, action) {
       state.authenticated = action.payload;
-      localStorage.setItem("authenticated", action.payload);
+      localStorage.setItem("authenticated", Boolean(action.payload));
     },
     setIsLoading(state) {
       state.isLoading = false;

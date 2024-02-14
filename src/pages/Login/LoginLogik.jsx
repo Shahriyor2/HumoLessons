@@ -41,7 +41,6 @@ export const LoginLogik = () => {
       dispatch(setAuthenticated(true));
       navigate("/user", { replace: false });
     } else {
-      dispatch(setAuthenticated(false));
       navigate("/login");
     }
   }, [token]);
