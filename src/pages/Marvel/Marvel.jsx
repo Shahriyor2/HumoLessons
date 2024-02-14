@@ -1,5 +1,7 @@
+import style from "./marvel.module.scss";
+
 function Marvel() {
-  return <div style={{ color: "red" }}>Marvel</div>;
+  return <div className={style.marvelContent}>Marvel</div>;
 }
 
 export default Marvel;

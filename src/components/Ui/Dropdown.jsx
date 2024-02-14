@@ -3,7 +3,6 @@ import { Dropdown, Space } from "antd";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { setAuthenticated } from "../../store/UserReducer/UserReducer";
-
 const linkStyle = {
   display: "flex",
   alignItems: "center",

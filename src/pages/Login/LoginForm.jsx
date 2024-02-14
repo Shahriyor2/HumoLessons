@@ -3,7 +3,7 @@ import { Button, Input } from "antd";
 import style from "./login.module.scss";
 import { LoginLogik } from "./LoginLogik";
 import { useDispatch, useSelector } from "react-redux";
-import { handleChangeInput } from "../../store/loginReducer/LoginReducer";
+import { handleChangeInput } from "../../store/LoginReducer/LoginReducer";
 
 export const LoginForm = () => {
   const { handleSubmit, handleOnChange, loadings } = LoginLogik();

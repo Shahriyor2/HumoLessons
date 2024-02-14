@@ -1,6 +1,8 @@
+import style from "./dc.module.scss";
+
 function Dicy() {
   return (
-    <div style={{ color: "red" }}>
+    <div className={style.dcContent}>
       <header>DC</header>
       <br />
       <main>

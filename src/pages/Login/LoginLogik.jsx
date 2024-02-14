@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router";
 import { useDispatch, useSelector } from "react-redux";
 import { setAuthenticated } from "../../store/UserReducer/UserReducer";
-import { handleChange } from "../../store/loginReducer/LoginReducer";
+import { handleChange } from "../../store/LoginReducer/LoginReducer";
 
 export const LoginLogik = () => {
   const [token, setToken] = useState("");
