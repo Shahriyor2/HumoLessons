@@ -29,11 +29,14 @@ const items = [
 export const DropDown = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const handleLogOut = () => {
     localStorage.removeItem("token");
     dispatch(setAuthenticated(false));
+    localStorage.removeItem("authenticated");
     navigate("/login");
   };
+
   return (
     <Dropdown
       trigger={"click"}
@@ -41,6 +44,7 @@ export const DropDown = () => {
         items,
         onClick: handleLogOut,
       }}
+      style={{ marginTop: "10px" }}
     >
       <Space align="center">
         <DownOutlined />

@@ -38,8 +38,8 @@ export const LoginLogik = () => {
 
   useEffect(() => {
     if (token) {
+      navigate("/user");
       dispatch(setAuthenticated(true));
-      navigate("/user", { replace: false });
     } else {
       navigate("/login");
     }

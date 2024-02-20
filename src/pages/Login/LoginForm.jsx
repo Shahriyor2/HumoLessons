@@ -1,15 +1,16 @@
 import { PoweroffOutlined } from "@ant-design/icons";
 import { Button, Input } from "antd";
-import style from "./login.module.scss";
-import { LoginLogik } from "./LoginLogik";
 import { useDispatch, useSelector } from "react-redux";
 import { handleChangeInput } from "../../store/LoginReducer/LoginReducer";
+import { LoginLogik } from "./LoginLogik";
+import style from "./login.module.scss";
 
 export const LoginForm = () => {
   const { handleSubmit, handleOnChange, loadings } = LoginLogik();
 
   const { userName, password } = useSelector((state) => state.login.userData);
   const dispatch = useDispatch();
+
   return (
     <div className={style.overlay}>
       <div className={style.contentBox}>
