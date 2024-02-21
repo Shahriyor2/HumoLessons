@@ -6,6 +6,7 @@ import { NotFound } from "../pages/NotFound/NotFound";
 import { Dc, Humo, Marvel, User } from "../routes/LazyRoutes";
 import { ProtectedRoute } from "./PrivateRoute";
 import { useSelector } from "react-redux";
+import { UserInfo } from "../pages/UserInfo/UserInfo";
 
 const roles = {
   SUPPORT: "johnd",
@@ -33,6 +34,7 @@ export const RoutesList = () => {
 
         {authenticated && (
           <>
+            <Route path="/user-info" element={<UserInfo />} />
             <Route
               path="/user"
               element={<ProtectedRoute role={[SUPPORT, ANALYTIC]} />}

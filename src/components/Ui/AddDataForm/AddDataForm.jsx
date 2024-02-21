@@ -29,7 +29,7 @@ export const AddDataForm = ({
   onSubmit,
   data,
   setKeyChange,
-  keyChange,
+  
 }) => {
   const [dataForm, setDataForm] = useState({
     name: "",
@@ -37,8 +37,6 @@ export const AddDataForm = ({
     address: "",
     tags: [],
   });
-
-  console.log("name", dataForm.name);
 
   const onAdd = () => {
     const newDataToUser = {
@@ -49,7 +47,7 @@ export const AddDataForm = ({
     onSubmit((prev) => [...prev, newDataToUser]);
 
     setShowForm(false);
-    setKeyChange(!keyChange);
+    setKeyChange(true);
   };
 
   useEffect(() => {
@@ -93,10 +91,7 @@ export const AddDataForm = ({
           >
             <Input name="name" value={dataForm.name} onChange={changeInputs} />
           </Form.Item>
-          <Form.Item
-            name={["age"]}
-            label="Age"
-          >
+          <Form.Item name={["age"]} label="Age">
             <Input
               name="age"
               style={{ width: "175px" }}

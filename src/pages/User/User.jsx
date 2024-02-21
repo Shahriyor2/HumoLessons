@@ -1,10 +1,9 @@
-import { DeleteOutlined, PlusOutlined, EditOutlined } from "@ant-design/icons";
-import { Button, Layout, Pagination, Space, Table, Tag } from "antd";
+import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { Button, Pagination, Space, Table, Tag } from "antd";
 import { useState } from "react";
 import { AddDataForm } from "../../components/Ui/AddDataForm/AddDataForm";
 import classes from "./user.module.scss";
 import { EditModal } from "../../components/Modal/Modal";
-const { Content } = Layout;
 
 function User() {
   const [data, setData] = useState([
@@ -33,6 +32,7 @@ function User() {
   const [showForm, setShowForm] = useState(false);
   const [showEditModal, setShowModalEdit] = useState(false);
   const [keyChange, setKeyChange] = useState(false);
+  const [editArr, setEditArr] = useState([]);
 
   const columns = [
     {
@@ -82,7 +82,10 @@ function User() {
             onClick={() => handleDelete(record.key)}
             icon={<DeleteOutlined />}
           />
-          <Button icon={<EditOutlined />} />
+          <Button
+            onClick={() => handleClickEdit(record.key)}
+            icon={<EditOutlined />}
+          />
         </Space>
       ),
     },
@@ -93,49 +96,54 @@ function User() {
     setData(newData);
   };
 
-  const handleEdit = (id) => {
-    const editId = data.includes((_id) => _id.key === id);
-    if (editId) {
-      setShowModalEdit(true);
+  const handleClickEdit = (key) => {
+    const findkey = data.find((item) => item.key === key);
+    setShowModalEdit(true);
+
+    if (findkey) {
+      setEditArr([findkey]);
     }
   };
 
   return (
-    <Layout>
-      <Content
-        style={{
-          margin: "24px 16px",
-          padding: 24,
-          background: "#fff",
-          minHeight: 280,
-        }}
-      >
-        <AddDataForm
-          key={keyChange ? "showForm" : "hideForm"}
-          showForm={showForm}
-          setShowForm={setShowForm}
-          onSubmit={setData}
-          data={data}
-          setKeyChange={setKeyChange}
-          keyChange={keyChange}
-        />
-        {  <EditModal  />}
-        <div className={classes.addUser}>
-          <Button
-            className={classes.plusIconBtn}
-            icon={<PlusOutlined />}
-            onClick={() => setShowForm(true)}
-          />
-        </div>
-        <Table pagination={false} columns={columns} dataSource={data} />
-        <Pagination
-          style={{ marginTop: "16px", textAlign: "center" }}
-          total={data.length}
-          pageSize={5}
-          showSizeChanger={false}
-        />
-      </Content>
-    </Layout>
+    <div
+      style={{
+        margin: "24px 16px",
+        padding: 24,
+        background: "#fff",
+      }}
+    >
+      {/* добавление пользователя */}
+      <AddDataForm
+        key={keyChange ? "showForm" : "hideForm"}
+        showForm={showForm}
+        setShowForm={setShowForm}
+        onSubmit={setData}
+        data={data}
+        setKeyChange={setKeyChange}
+      />
+      {/* модалка */}
+      <EditModal
+        editArr={editArr}
+        showEditModal={showEditModal}
+        setShowModalEdit={setShowModalEdit}
+        setData={setData}
+        data={setData}
+      />
+      {/* кнопка добавления пользователя */}
+      <div className={classes.plusIconBtn}>
+        <Button icon={<PlusOutlined />} onClick={() => setShowForm(true)}>
+          Добавить пользователя
+        </Button>
+      </div>
+      <Table pagination={false} columns={columns} dataSource={data} />
+      <Pagination
+        style={{ marginTop: "16px", textAlign: "center" }}
+        total={data.length}
+        pageSize={5}
+        showSizeChanger={false}
+      />
+    </div>
   );
 }
 export default User;

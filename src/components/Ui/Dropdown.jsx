@@ -43,11 +43,13 @@ export const DropDown = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const handleLogOut = () => {
-    localStorage.removeItem("token");
-    dispatch(setAuthenticated(false));
-    localStorage.removeItem("authenticated");
-    navigate("/login");
+  const handleLogOut = ({ key }) => {
+    if (key === "2") {
+      localStorage.removeItem("token");
+      dispatch(setAuthenticated(false));
+      localStorage.removeItem("authenticated");
+      navigate("/login");
+    }
   };
 
   return (

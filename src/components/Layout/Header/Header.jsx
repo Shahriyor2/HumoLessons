@@ -12,7 +12,7 @@ export const Header = () => {
   const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout>
       <Layout.Sider trigger={null} collapsible collapsed={collapsed}>
         <div className="demo-logo-vertical" />
         <Sidebar />
@@ -26,16 +26,15 @@ export const Header = () => {
             onClick={() => setCollapsed(!collapsed)}
             style={{ fontSize: "16px", width: 64, height: 64 }}
           />
-          <>
-            <div>
-              <Avatar
-                className={classes.userImage}
-                size="large"
-                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
-              />
-              <DropDown />
-            </div>
-          </>
+
+          <div>
+            <Avatar
+              className={classes.userImage}
+              size="large"
+              src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+            />
+            <DropDown />
+          </div>
         </Layout.Header>
         <Content />
         <Footer />
