@@ -1,10 +1,6 @@
-import { useState } from "react";
-import {
-  AppstoreOutlined,
-  MailOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { SettingOutlined } from "@ant-design/icons";
 import { Menu } from "antd";
+import { useState } from "react";
 
 function getItem(label, key, icon, children, type) {
   return {
@@ -16,21 +12,7 @@ function getItem(label, key, icon, children, type) {
   };
 }
 const items = [
-  getItem("Navigation One", "sub1", <MailOutlined />, [
-    getItem("Option 1", "1"),
-    getItem("Option 2", "2"),
-    getItem("Option 3", "3"),
-    getItem("Option 4", "4"),
-  ]),
-  getItem("Navigation Two", "sub2", <AppstoreOutlined />, [
-    getItem("Option 5", "5"),
-    getItem("Option 6", "6"),
-    getItem("Submenu", "sub3", null, [
-      getItem("Option 7", "7"),
-      getItem("Option 8", "8"),
-    ]),
-  ]),
-  getItem("Navigation Three", "sub4", <SettingOutlined />, [
+  getItem("Settings", "sub1", <SettingOutlined />, [
     getItem("Option 9", "9"),
     getItem("Option 10", "10"),
     getItem("Option 11", "11"),
@@ -39,7 +21,8 @@ const items = [
 ];
 
 const rootSubmenuKeys = ["sub1", "sub2", "sub4"];
-export const HeaderMenu = () => {
+
+function MenuList() {
   const [openKeys, setOpenKeys] = useState(["sub1"]);
   const onOpenChange = (keys) => {
     const latestOpenKey = keys.find((key) => openKeys.indexOf(key) === -1);
@@ -53,12 +36,13 @@ export const HeaderMenu = () => {
   return (
     <Menu
       mode="inline"
+      theme="dark"
+      color="white"
       openKeys={openKeys}
       onOpenChange={onOpenChange}
-      style={{
-        width: 256,
-      }}
       items={items}
     />
   );
-};
+}
+
+export { MenuList };

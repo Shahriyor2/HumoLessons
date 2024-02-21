@@ -1,26 +1,39 @@
-import { DownOutlined, LogoutOutlined } from "@ant-design/icons";
+import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
 import { setAuthenticated } from "../../store/UserReducer/UserReducer";
+
 const linkStyle = {
   display: "flex",
   alignItems: "center",
   justifyContent: "space-between",
-  height: "20px",
+  height: "27px",
+  color: "red",
 };
 
-const paragrahpStyle = {
-  marginLeft: "5px",
+const infoStyle = {
+  height: "27px",
+  display: "flex",
+  alignItems: "center",
 };
 
 const items = [
   {
     key: "1",
     label: (
+      <Space style={infoStyle}>
+        <UserOutlined />
+        <p style={infoStyle}>User</p>
+      </Space>
+    ),
+  },
+  {
+    key: "2",
+    label: (
       <Space style={linkStyle}>
         <LogoutOutlined />
-        <p style={paragrahpStyle}>Log Out</p>
+        <p>Log Out</p>
       </Space>
     ),
   },
@@ -44,7 +57,6 @@ export const DropDown = () => {
         items,
         onClick: handleLogOut,
       }}
-      style={{ marginTop: "10px" }}
     >
       <Space align="center">
         <DownOutlined />

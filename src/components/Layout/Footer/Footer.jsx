@@ -1,16 +1,11 @@
-import style from "./footer.module.scss";
-import { useSelector } from "react-redux";
+import { Layout } from "antd";
 
-export const Footer = () => {
-  const getFullYear = new Date().getFullYear();
-
-  const { authenticated } = useSelector((state) => state.user);
-  const backgroundStyle = authenticated
-    ? { background: "rgb(226, 111, 50)" }
-    : { background: "gray" };
+const Footer = () => {
   return (
-    <div style={backgroundStyle} className={style.footerBox}>
-      <h1 className={style.title}>Humo {getFullYear}</h1>
-    </div>
+    <Layout.Footer style={{ textAlign: "center" }}>
+      Humo ©{new Date().getFullYear()} Created by Ant UED
+    </Layout.Footer>
   );
 };
+
+export { Footer };

@@ -1,34 +1,45 @@
-import { jwtDecode } from "jwt-decode";
-import style from "./header.module.scss";
-import { useSelector } from "react-redux";
+import { MenuFoldOutlined, MenuUnfoldOutlined } from "@ant-design/icons";
+import { Avatar, Button, Layout } from "antd";
+import { useState } from "react";
+import classes from "../../Layout/Header/header.module.scss";
+import { Sidebar } from "../../Sidebar/Sidebar";
 import { DropDown } from "../../Ui/Dropdown";
-import { Avatar } from "antd";
-import { UserOutlined } from "@ant-design/icons";
+import { Content } from "../Content/Content";
+import { Footer } from "../Footer/Footer";
+import { MenuList } from "../MenuList/MenuList";
 
 export const Header = () => {
-  const authenticated = useSelector((state) => state.user.authenticated);
-  const token = localStorage.getItem("token");
-  const tokenName = token && jwtDecode(token).user;
-
-  console.log("authenticated", authenticated);
-
-  const backgroundStyle = authenticated
-    ? { background: "rgb(226, 111, 50)" }
-    : { background: "gray" };
-
-  const avatarStyle = {
-    background: "darkgray",
-    marginRight: "5px",
-  };
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
-    <div style={backgroundStyle} className={style.headerContent}>
-      <h1>Humo</h1>
-      <div>
-        <span className={style.span}>{token ? tokenName : ""}</span>
-        {token && <Avatar icon={<UserOutlined />} style={avatarStyle} />}
-        {token && <DropDown />}
-      </div>
-    </div>
+    <Layout style={{ minHeight: "100vh" }}>
+      <Layout.Sider trigger={null} collapsible collapsed={collapsed}>
+        <div className="demo-logo-vertical" />
+        <Sidebar />
+        <MenuList />
+      </Layout.Sider>
+      <Layout className="site-layout">
+        <Layout.Header className={classes.userHeader}>
+          <Button
+            type="text"
+            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
+            onClick={() => setCollapsed(!collapsed)}
+            style={{ fontSize: "16px", width: 64, height: 64 }}
+          />
+          <>
+            <div>
+              <Avatar
+                className={classes.userImage}
+                size="large"
+                src="https://zos.alipayobjects.com/rmsportal/jkjgkEfvpUPVyRjUImniVslZfWPnJuuZ.png"
+              />
+              <DropDown />
+            </div>
+          </>
+        </Layout.Header>
+        <Content />
+        <Footer />
+      </Layout>
+    </Layout>
   );
 };

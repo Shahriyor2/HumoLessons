@@ -1,24 +1,12 @@
-import {
-  DeleteOutlined,
-  MenuFoldOutlined,
-  MenuUnfoldOutlined,
-  UploadOutlined,
-  UserOutlined,
-  VideoCameraOutlined,
-  PlusOutlined,
-  SettingTwoTone,
-} from "@ant-design/icons";
-import { Button, Layout, Menu, Space, Table, Tag, theme } from "antd";
+import { DeleteOutlined, PlusOutlined, EditOutlined } from "@ant-design/icons";
+import { Button, Layout, Pagination, Space, Table, Tag } from "antd";
 import { useState } from "react";
-import classes from "./user.module.scss";
 import { AddDataForm } from "../../components/Ui/AddDataForm/AddDataForm";
-const { Header, Sider, Content } = Layout;
+import classes from "./user.module.scss";
+import { EditModal } from "../../components/Modal/Modal";
+const { Content } = Layout;
 
 function User() {
-  const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer, borderRadiusLG },
-  } = theme.useToken();
   const [data, setData] = useState([
     {
       key: "1",
@@ -43,6 +31,8 @@ function User() {
     },
   ]);
   const [showForm, setShowForm] = useState(false);
+  const [showEditModal, setShowModalEdit] = useState(false);
+  const [keyChange, setKeyChange] = useState(false);
 
   const columns = [
     {
@@ -87,12 +77,12 @@ function User() {
       render: (_, record) => (
         <Space size="middle">
           <a>Invite {record.name}</a>
-          <button
-            className={classes.btnRecord}
+
+          <Button
             onClick={() => handleDelete(record.key)}
-          >
-            <DeleteOutlined />
-          </button>
+            icon={<DeleteOutlined />}
+          />
+          <Button icon={<EditOutlined />} />
         </Space>
       ),
     },
@@ -103,76 +93,48 @@ function User() {
     setData(newData);
   };
 
+  const handleEdit = (id) => {
+    const editId = data.includes((_id) => _id.key === id);
+    if (editId) {
+      setShowModalEdit(true);
+    }
+  };
+
   return (
     <Layout>
-      <Sider trigger={null} collapsible collapsed={collapsed}>
-        <div className="demo-logo-vertical" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={["1"]}
-          items={[
-            {
-              key: "1",
-              icon: <UserOutlined />,
-              label: "Marvel",
-            },
-            {
-              key: "2",
-              icon: <VideoCameraOutlined />,
-              label: "DC",
-            },
-            {
-              key: "3",
-              icon: <UploadOutlined />,
-              label: "Humo",
-            },
-            {
-              key: "4",
-              icon: <SettingTwoTone />,
-              label: "Settings",
-            },
-          ]}
+      <Content
+        style={{
+          margin: "24px 16px",
+          padding: 24,
+          background: "#fff",
+          minHeight: 280,
+        }}
+      >
+        <AddDataForm
+          key={keyChange ? "showForm" : "hideForm"}
+          showForm={showForm}
+          setShowForm={setShowForm}
+          onSubmit={setData}
+          data={data}
+          setKeyChange={setKeyChange}
+          keyChange={keyChange}
         />
-      </Sider>
-      <Layout>
-        <Header
-          className={classes.userHeader}
-          style={{
-            background: colorBgContainer,
-          }}
-        >
+        {  <EditModal  />}
+        <div className={classes.addUser}>
           <Button
-            type="text"
-            icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
-            onClick={() => setCollapsed(!collapsed)}
-            style={{
-              fontSize: "16px",
-              width: 64,
-              height: 34,
-            }}
+            className={classes.plusIconBtn}
+            icon={<PlusOutlined />}
+            onClick={() => setShowForm(true)}
           />
-        </Header>
-        <Content
-          style={{
-            margin: "24px 16px",
-            padding: 24,
-            minHeight: 280,
-            background: colorBgContainer,
-            borderRadius: borderRadiusLG,
-          }}
-        >
-          <AddDataForm showForm={showForm} setShowForm={setShowForm} />
-          <div className={classes.addUser}>
-            <Button
-              type="text"
-              icon={<PlusOutlined />}
-              onClick={() => setShowForm(true)}
-            />
-          </div>
-          <Table columns={columns} dataSource={data} />
-        </Content>
-      </Layout>
+        </div>
+        <Table pagination={false} columns={columns} dataSource={data} />
+        <Pagination
+          style={{ marginTop: "16px", textAlign: "center" }}
+          total={data.length}
+          pageSize={5}
+          showSizeChanger={false}
+        />
+      </Content>
     </Layout>
   );
 }

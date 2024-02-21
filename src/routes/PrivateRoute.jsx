@@ -2,22 +2,25 @@
 
 import { jwtDecode } from "jwt-decode";
 import { Fragment } from "react";
-import { useSelector } from "react-redux";
 import { Navigate, Outlet } from "react-router";
+import LayoutWrapper from "../components/Layout/Layout/LayoutWrapper";
 
 export const ProtectedRoute = ({ role }) => {
   const getToken = localStorage.getItem("token");
   const { user } = jwtDecode(getToken);
-
-  const { authenticated } = useSelector((state) => state.user);
-  console.log(authenticated);
 
   // Guard clause
   if (!role) return;
 
   return (
     <Fragment>
-      {role?.includes(user) ? <Outlet /> : <Navigate to="/login" />}
+      {role?.includes(user) ? (
+        <LayoutWrapper>
+          <Outlet />
+        </LayoutWrapper>
+      ) : (
+        <Navigate to="/login" />
+      )}
     </Fragment>
   );
 };

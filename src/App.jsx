@@ -1,7 +1,12 @@
-import { RoutesList } from "./routes/RoutesList";
+import { Header } from "./components/Layout/Header/Header";
 
 function App() {
-  return <RoutesList />;
+  return (
+    <>
+      <Header />
+    </>
+  );
 }
 
-export default App;
+export { App };
+
