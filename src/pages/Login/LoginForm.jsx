@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { handleChangeInput } from "../../store/LoginReducer/LoginReducer";
 import { LoginLogik } from "./LoginLogik";
 import style from "./login.module.scss";
+import { Flex } from "../../components/Ui/Flex/Flex";
 
 export const LoginForm = () => {
   const { handleSubmit, handleOnChange, loadings } = LoginLogik();
@@ -12,10 +13,11 @@ export const LoginForm = () => {
   const dispatch = useDispatch();
 
   return (
-    <div className={style.overlay}>
-      <div className={style.contentBox}>
+    <Flex minHeight="100vh">
+      <section className={style.contentBox}>
         <div className={style.userName}>
           <h1>Вход</h1>
+
           <Input
             name="userName"
             type="text"
@@ -23,12 +25,11 @@ export const LoginForm = () => {
             placeholder="Номер телефона/email"
             onChange={handleOnChange}
           />
-          {userName.length > 0 && userName.length < 5 ? (
+          {userName.length > 0 && userName.length < 5 && (
             <p>не менее 5 символов</p>
-          ) : (
-            ""
           )}
         </div>
+
         <div className={style.password}>
           <h1>Пароль</h1>
           <Input
@@ -38,12 +39,11 @@ export const LoginForm = () => {
             placeholder="Пароль..."
             onChange={handleOnChange}
           />
-          {password.length > 0 && password.length < 3 ? (
+          {password.length > 0 && password.length < 3 && (
             <p> не менее 3 символов</p>
-          ) : (
-            ""
           )}
         </div>
+
         <Button
           className={style.logBtn}
           disabled={password.length < 3 || userName.length < 5}
@@ -54,6 +54,7 @@ export const LoginForm = () => {
         >
           Вход
         </Button>
+
         <div
           className={style.autoBlockText}
           onClick={() => dispatch(handleChangeInput())}
@@ -67,7 +68,7 @@ export const LoginForm = () => {
             <span>83r5^_</span>
           </p>
         </div>
-      </div>
-    </div>
+      </section>
+    </Flex>
   );
 };
