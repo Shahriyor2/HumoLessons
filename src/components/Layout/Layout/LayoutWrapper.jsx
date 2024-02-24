@@ -1,9 +1,10 @@
 import { Layout } from "antd";
 import { Header } from "../Header/Header";
+import classes from "./layout.module.scss";
 
 const LayoutWrapper = () => {
   return (
-    <Layout style={{ minHeight: "100vh" }}>
+    <Layout className={classes.layoutWrapper}>
       <Header />
     </Layout>
   );

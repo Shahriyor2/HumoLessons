@@ -39,9 +39,11 @@ export const LoginForm = () => {
             placeholder="Пароль..."
             onChange={handleOnChange}
           />
-          {password.length > 0 && password.length < 3 && (
-            <p> не менее 3 символов</p>
-          )}
+          <section>
+            {password.length > 0 && password.length < 3 && (
+              <p> не менее 3 символов</p>
+            )}
+          </section>
         </div>
 
         <Button
@@ -55,7 +57,7 @@ export const LoginForm = () => {
           Вход
         </Button>
 
-        <div
+        <header
           className={style.autoBlockText}
           onClick={() => dispatch(handleChangeInput())}
         >
@@ -67,7 +69,7 @@ export const LoginForm = () => {
             Пароль:
             <span>83r5^_</span>
           </p>
-        </div>
+        </header>
       </section>
     </Flex>
   );

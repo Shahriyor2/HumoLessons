@@ -2,36 +2,26 @@ import { DownOutlined, LogoutOutlined, UserOutlined } from "@ant-design/icons";
 import { Dropdown, Space } from "antd";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router";
-import { setAuthenticated } from "../../store/UserReducer/UserReducer";
-
-const linkStyle = {
-  display: "flex",
-  alignItems: "center",
-  justifyContent: "space-between",
-  height: "27px",
-  color: "red",
-};
-
-const infoStyle = {
-  height: "27px",
-  display: "flex",
-  alignItems: "center",
-};
+import { setAuthenticated } from "../../../store/UserReducer/UserReducer";
+import classes from "./dropdown.module.scss";
+import { Link } from "react-router-dom";
 
 const items = [
   {
     key: "1",
     label: (
-      <Space style={infoStyle}>
-        <UserOutlined />
-        <p style={infoStyle}>User</p>
+      <Space className={classes["infoStyle"]}>
+        <Link to="/user-info">
+          <UserOutlined />
+        </Link>
+        <p>User</p>
       </Space>
     ),
   },
   {
     key: "2",
     label: (
-      <Space style={linkStyle}>
+      <Space className={classes["linkStyle"]}>
         <LogoutOutlined />
         <p>Log Out</p>
       </Space>

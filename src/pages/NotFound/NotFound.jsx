@@ -7,10 +7,10 @@ export const NotFound = () => {
     navigate("/user");
   };
   return (
-    <div className={style.notFound}>
+    <header className={style.notFound}>
       <h1 onClick={() => handleToBackClick()}>
         Go back to Main page :{"("} <br /> Pleaze Log out
       </h1>
-    </div>
+    </header>
   );
 };

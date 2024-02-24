@@ -1,38 +1,19 @@
-import { DeleteOutlined, EditOutlined, PlusOutlined } from "@ant-design/icons";
+import { DeleteOutlined, EditOutlined } from "@ant-design/icons";
 import { Button, Pagination, Space, Table, Tag } from "antd";
 import { useState } from "react";
-import { AddDataForm } from "../../components/Ui/AddDataForm/AddDataForm";
-import classes from "./user.module.scss";
+import { useDispatch, useSelector } from "react-redux";
 import { EditModal } from "../../components/Modal/Modal";
+import { AddDataForm } from "../../components/Ui/AddDataForm/AddDataForm";
+import {
+  handleClickDelete
+} from "../../store/headerAddSlice/headerAddSlice";
+import classes from "./user.module.scss";
 
 function User() {
-  const [data, setData] = useState([
-    {
-      key: "1",
-      name: "John Brown",
-      age: 32,
-      address: "New York No. 1 Lake Park",
-      tags: ["nice", "developer"],
-    },
-    {
-      key: "2",
-      name: "Jim Green",
-      age: 42,
-      address: "London No. 1 Lake Park",
-      tags: ["loser"],
-    },
-    {
-      key: "3",
-      name: "Joe Black",
-      age: 32,
-      address: "Sydney No. 1 Lake Park",
-      tags: ["cool", "teacher"],
-    },
-  ]);
-  const [showForm, setShowForm] = useState(false);
   const [showEditModal, setShowModalEdit] = useState(false);
-  const [keyChange, setKeyChange] = useState(false);
   const [editArr, setEditArr] = useState([]);
+  const { keyChange, data } = useSelector((state) => state.addUser);
+  const dispatch = useDispatch();
 
   const columns = [
     {
@@ -74,14 +55,16 @@ function User() {
     {
       title: "Action",
       key: "action",
-      render: (_, record) => (
+      render: (record) => (
         <Space size="middle">
           <a>Invite {record.name}</a>
 
+          {/* кнопка удаления */}
           <Button
-            onClick={() => handleDelete(record.key)}
+            onClick={() => dispatch(handleClickDelete(record.key))}
             icon={<DeleteOutlined />}
           />
+          {/* кнопка edit */}
           <Button
             onClick={() => handleClickEdit(record.key)}
             icon={<EditOutlined />}
@@ -90,11 +73,6 @@ function User() {
       ),
     },
   ];
-
-  const handleDelete = (key) => {
-    const newData = data.filter((item) => item.key !== key);
-    setData(newData);
-  };
 
   const handleClickEdit = (key) => {
     const findkey = data.find((item) => item.key === key);
@@ -106,39 +84,22 @@ function User() {
   };
 
   return (
-    <div
-      style={{
-        margin: "24px 16px",
-        padding: 24,
-        background: "#fff",
-      }}
-    >
+    <div className={classes.contentBox}>
       {/* добавление пользователя */}
-      <AddDataForm
-        key={keyChange ? "showForm" : "hideForm"}
-        showForm={showForm}
-        setShowForm={setShowForm}
-        onSubmit={setData}
-        data={data}
-        setKeyChange={setKeyChange}
-      />
+      <AddDataForm key={keyChange ? "showForm" : "hideForm"} />
       {/* модалка */}
       <EditModal
         editArr={editArr}
         showEditModal={showEditModal}
         setShowModalEdit={setShowModalEdit}
-        setData={setData}
-        data={setData}
       />
-      {/* кнопка добавления пользователя */}
-      <div className={classes.plusIconBtn}>
-        <Button icon={<PlusOutlined />} onClick={() => setShowForm(true)}>
-          Добавить пользователя
-        </Button>
-      </div>
+
+      {/* список всех участников */}
       <Table pagination={false} columns={columns} dataSource={data} />
+
+      {/* пагинация */}
       <Pagination
-        style={{ marginTop: "16px", textAlign: "center" }}
+        className={classes.pagination}
         total={data.length}
         pageSize={5}
         showSizeChanger={false}

@@ -1,6 +1,13 @@
 import { Button, Form, Input, Select } from "antd";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import {
+  setData,
+  setKeyChange,
+  setShowForm,
+} from "../../../store/headerAddSlice/headerAddSlice";
 import classes from "./adduser.module.scss";
+
 const layout = {
   labelCol: {
     span: 8,
@@ -23,14 +30,9 @@ const validateMessages = {
 };
 /* eslint-enable no-template-curly-in-string */
 
-export const AddDataForm = ({
-  showForm,
-  setShowForm,
-  onSubmit,
-  data,
-  setKeyChange,
-  
-}) => {
+export const AddDataForm = () => {
+  const dispatch = useDispatch();
+  const { showFrom, data } = useSelector((state) => state.addUser);
   const [dataForm, setDataForm] = useState({
     name: "",
     age: "",
@@ -44,20 +46,10 @@ export const AddDataForm = ({
       ...dataForm,
     };
 
-    onSubmit((prev) => [...prev, newDataToUser]);
-
-    setShowForm(false);
-    setKeyChange(true);
+    dispatch(setData(newDataToUser));
+    dispatch(setShowForm(false));
+    dispatch(setKeyChange(true));
   };
-
-  useEffect(() => {
-    setDataForm({
-      name: "",
-      age: "",
-      address: "",
-      tags: [],
-    });
-  }, [data]);
 
   const changeInputs = (event) => {
     const { name, value } = event.target;
@@ -70,7 +62,7 @@ export const AddDataForm = ({
 
   return (
     <div
-      className={`${classes.overlay} ${showForm ? classes.overlayVisible : ""}`}
+      className={`${classes.overlay} ${showFrom ? classes.overlayVisible : ""}`}
     >
       <div className={classes.protDrawer}>
         <Form
@@ -127,7 +119,7 @@ export const AddDataForm = ({
             }}
           >
             <div className={classes.ovarlayBtns}>
-              <Button onClick={() => setShowForm(false)}>Back</Button>
+              <Button onClick={() => dispatch(setShowForm(false))}>Back</Button>
               <Button type="primary" htmlType="submit">
                 Add
               </Button>

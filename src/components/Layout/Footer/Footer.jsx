@@ -1,8 +1,9 @@
 import { Layout } from "antd";
+import classes from "./footer.module.scss";
 
 const Footer = () => {
   return (
-    <Layout.Footer style={{ textAlign: "center" }}>
+    <Layout.Footer className={classes.layoutFooter}>
       Humo ©{new Date().getFullYear()} Created by Ant UED
     </Layout.Footer>
   );

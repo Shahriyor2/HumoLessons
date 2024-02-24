@@ -31,37 +31,46 @@ export const RoutesList = () => {
         <Route path="/" element={<Navigate to="/login" />} />
 
         <Route path="/login" element={<LoginForm />} />
-
+        <Route path="/user-info" element={<UserInfo />} />
         {authenticated && (
-          <>
-            <Route path="/user-info" element={<UserInfo />} />
+          <Route>
             <Route
               path="/user"
               element={<ProtectedRoute role={[SUPPORT, ANALYTIC]} />}
             >
-              <Route path="/user" element={<User />} />
+              <Route
+                path="/user"
+                element={
+                  <Suspense fallback={""}>
+                    <User />
+                  </Suspense>
+                }
+              />
             </Route>
-
             <Route
               path="/marvel"
               element={<ProtectedRoute role={[SUPPORT, ANALYTIC]} />}
             >
-              <Route path="/marvel" element={<Marvel />} />
+              <Route
+                path="/marvel"
+                element={
+                  <Suspense fallback={""}>
+                    <Marvel />
+                  </Suspense>
+                }
+              />
             </Route>
-
             <Route path="/dc" element={<ProtectedRoute role={[SUPERVISOR]} />}>
               <Route path="/dc" element={<Dc />} />
             </Route>
-
             <Route
               path="/humo"
               element={<ProtectedRoute role={[SUPERVISOR, SUPPORT]} />}
             >
               <Route path="/humo" element={<Humo />} />
             </Route>
-
             <Route path="*" element={<NotFound />} />
-          </>
+          </Route>
         )}
       </Routes>
     </Suspense>

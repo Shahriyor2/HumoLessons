@@ -5,7 +5,7 @@ function Content() {
   return (
     <Layout.Content>
       <Outlet />
-    </Layout.Content>
+    </Layout.Content> 
   );
 }
 

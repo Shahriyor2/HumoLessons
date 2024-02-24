@@ -3,6 +3,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  
 }
 
 .bntCollapsed {
@@ -35,4 +36,15 @@
   Button {
     margin-bottom: 5px;
   }
+}
+
+.pagination {
+  margin-top: 16px;
+  text-align: center;
+}
+
+.contentBox{
+  margin: 24px 16px;
+  padding: 24px;
+  background: #fff
 }

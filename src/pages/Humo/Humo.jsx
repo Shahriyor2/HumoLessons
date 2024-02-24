@@ -1,5 +1,5 @@
 function Humo() {
-  return <div>Humo</div>;
+  return <header>Humo</header>;
 }
 
 export default Humo;

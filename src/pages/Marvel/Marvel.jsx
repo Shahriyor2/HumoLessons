@@ -1,7 +1,7 @@
 import style from "./marvel.module.scss";
 
 function Marvel() {
-  return <div className={style.marvelContent}>Marvel</div>;
+  return <header className={style.marvelContent}>Marvel</header>;
 }
 
 export default Marvel;
