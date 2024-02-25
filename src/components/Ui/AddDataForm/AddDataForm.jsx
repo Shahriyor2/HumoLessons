@@ -33,6 +33,7 @@ const validateMessages = {
 export const AddDataForm = () => {
   const dispatch = useDispatch();
   const { showFrom, data } = useSelector((state) => state.addUser);
+  const { keyChange } = useSelector((state) => state.addUser);
   const [dataForm, setDataForm] = useState({
     name: "",
     age: "",
@@ -48,7 +49,7 @@ export const AddDataForm = () => {
 
     dispatch(setData(newDataToUser));
     dispatch(setShowForm(false));
-    dispatch(setKeyChange(true));
+    dispatch(setKeyChange(!keyChange));
   };
 
   const changeInputs = (event) => {

@@ -26,7 +26,14 @@ const initialState = {
       tags: ["cool", "teacher"],
     },
   ],
+  pagination: {
+    current: 1,
+    pageSize: 5,
+    total: 0,
+  },
 };
+
+initialState.pagination.total = initialState.data.length;
 
 export const headerAddSlice = createSlice({
   name: "form",
@@ -40,13 +47,23 @@ export const headerAddSlice = createSlice({
     },
     setData(state, { payload }) {
       state.data = [...state.data, payload];
+      state.pagination.total += 1;
     },
     handleClickDelete(state, { payload }) {
       const findKey = state.data.filter((item) => item.key !== payload);
       state.data = findKey;
+      state.pagination.total -= 1;
+    },
+    handlePageChange(state, { payload }) {
+      state.pagination = (prev) => ({ ...prev, current: payload });
     },
   },
 });
 
-export const { setShowForm, setKeyChange, setData, handleClickDelete } =
-  headerAddSlice.actions;
+export const {
+  setShowForm,
+  setKeyChange,
+  setData,
+  handleClickDelete,
+  handlePageChange,
+} = headerAddSlice.actions;

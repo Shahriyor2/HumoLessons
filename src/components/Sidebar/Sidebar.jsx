@@ -5,7 +5,6 @@ import {
 } from "@ant-design/icons";
 import { Menu } from "antd";
 import { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 function getItem(label, key, icon, children) {
   return {
@@ -31,22 +30,17 @@ const items = [
     </Link>
   ),
   getItem("Settings", "sub2", <SettingOutlined />, [
-    getItem("Team 1", "6"),
-    getItem("Team 2", "8"),
+    getItem("Team 1", "4"),
+    getItem("Team 2", "5"),
   ]),
 ];
 
 function Sidebar() {
   const [selectedKey, setSelectedKey] = useState("");
-  const { authenticated } = useSelector((state) => state.user);
 
   useEffect(() => {
     const getKey = localStorage.getItem("key");
-    setSelectedKey(getKey);
-  }, []);
-
-  useEffect(() => {
-    setSelectedKey("1");
+    setSelectedKey(getKey || "1");
   }, []);
 
   const handleSelectedKey = (key) => {
@@ -56,7 +50,6 @@ function Sidebar() {
   return (
     <Menu
       theme="dark"
-      defaultSelectedKeys={["1"]}
       mode="inline"
       items={items}
       onClick={({ key }) => handleSelectedKey(key)}

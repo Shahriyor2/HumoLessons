@@ -7,6 +7,7 @@ function EditModal({ showEditModal, setShowModalEdit, editArr }) {
 
   return (
     <Modal
+      align="center"
       title="Edit Modal"
       visible={showEditModal}
       onCancel={handleCancel}
@@ -16,7 +17,7 @@ function EditModal({ showEditModal, setShowModalEdit, editArr }) {
         </Button>,
       ]}
     >
-      <section>
+      <section style={{ textAlign: "center" }}>
         {editArr.map((item) => {
           return (
             <div key={item.key}>

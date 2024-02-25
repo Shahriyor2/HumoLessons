@@ -5,14 +5,20 @@ import { useDispatch, useSelector } from "react-redux";
 import { EditModal } from "../../components/Modal/Modal";
 import { AddDataForm } from "../../components/Ui/AddDataForm/AddDataForm";
 import {
-  handleClickDelete
+  handleClickDelete,
+  handlePageChange,
 } from "../../store/headerAddSlice/headerAddSlice";
 import classes from "./user.module.scss";
 
 function User() {
   const [showEditModal, setShowModalEdit] = useState(false);
   const [editArr, setEditArr] = useState([]);
-  const { keyChange, data } = useSelector((state) => state.addUser);
+  const { keyChange, data, pagination } = useSelector((state) => state.addUser);
+  // const [pagination, setPagination] = useState({
+  //   current: 5,
+  //   pageSize: 5,
+  //   total: data.length,
+  // });
   const dispatch = useDispatch();
 
   const columns = [
@@ -95,15 +101,29 @@ function User() {
       />
 
       {/* список всех участников */}
-      <Table pagination={false} columns={columns} dataSource={data} />
+      <Table
+        // pagination={pagination.pageSize > 5 ? pagination : true}
+        pagination={pagination}
+        total={pagination.total}
+        pageSize={pagination.pageSize}
+        current={pagination.current}
+        defaultCurrent={1}
+        columns={columns}
+        dataSource={data}
+      />
 
       {/* пагинация */}
-      <Pagination
+      {/* <Pagination
         className={classes.pagination}
-        total={data.length}
-        pageSize={5}
-        showSizeChanger={false}
-      />
+        total={pagination.total}
+        pageSize={pagination.pageSize}
+        current={pagination.current}
+        defaultCurrent={1}
+        onChange={handlePageChange}
+        // showSizeChanger={false}
+        // появляется поля инпута для выбора страницы
+        // simple={true}
+      /> */}
     </div>
   );
 }
